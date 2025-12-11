@@ -8,6 +8,14 @@ on:
 
     branches: [ "main" ] 
 
+permissions: 
+
+  contents: read 
+
+  security-events: write 
+
+  actions: read 
+
  
 
 jobs: 
@@ -65,7 +73,10 @@ jobs:
     - name: Run Bandit 
 
       run: bandit -r api --severity-level high 
-      ############################################ 
+
+ 
+
+    ############################################ 
 
     # 3. Build Docker 
 
@@ -73,7 +84,7 @@ jobs:
 
     - name: Build Docker image 
 
-      run: docker build -t devsecops-api ./docker 
+      run: docker build -t devsecops-api . 
 
  
 
