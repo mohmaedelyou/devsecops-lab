@@ -23,9 +23,7 @@ jobs:
     - uses: actions/checkout@v3
 
 
-    ############################################
-    # 1. Analyse SAST CodeQL
-    ############################################
+   
     - name: Init CodeQL
       uses: github/codeql-action/init@v3
       with:
@@ -36,9 +34,7 @@ jobs:
       uses: github/codeql-action/analyze@v3
 
 
-    ############################################
-    # 2. Analyse sécurité Python avec Bandit
-    ############################################
+   
     - name: Install Bandit
       run: pip install bandit
 
@@ -47,16 +43,10 @@ jobs:
       run: bandit -r api --severity-level high
 
 
-    ############################################
-    # 3. Build Docker
-    ############################################
     - name: Build Docker image
       run: docker build -t devsecops-api .
 
 
-    ############################################
-    # 4. Scan Docker avec Trivy
-    ############################################
     - name: Trivy Scan
       uses: aquasecurity/trivy-action@master
       with:
